@@ -4,11 +4,11 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Link
 } from "react-router-dom";
 import Home from "./pages/Home";
 import Settings from "./pages/Settings";
 import Navbar from "./components/Navbar";
+// import Navbar from "./components/Navbar";
 
 function App() {
   useEffect(() => {
@@ -25,7 +25,7 @@ function App() {
     <main className="">
       <Router>
       <div className="h-screen flex flex-col">
-        {/* <Navbar /> */}
+        <Navbar />
         <div className="flex-1 p-4 bg-gray-100 dark:bg-gray-900 text-black dark:text-white">
           <Routes>
             <Route path="/" element={<Home />} />

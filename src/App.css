@@ -14,3 +14,14 @@ html, body {
   width: 100%;
 }
 
+/* index.css */
+
+button:focus,
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+
