@@ -1,8 +1,9 @@
 import Card from "../components/ui/Card";
 import { MdContentCopy } from "react-icons/md";
+import { TiTick } from "react-icons/ti";
 import { useState } from "react";
 
-const arr = [
+const techList = [
   "Docker",
   "npm",
   "Python",
@@ -77,70 +78,89 @@ const Home = () => {
       setCopiedIndex(index);
       setTimeout(() => setCopiedIndex(null), 2000);
     } catch (err) {
-      console.error("Failed to copy:", err);
+      console.error("Copy failed:", err);
     }
   };
 
   return (
-    <div className="h-screen flex flex-col bg-gray-50 dark:bg-gray-900">
-      {/* Top Section: Cards */}
-      <div className="p-4 overflow-y-auto max-h-[25vh]">
-        <div className="flex flex-wrap gap-2">
-          {arr.map((data, index) => (
-            <Card key={index} title={data} />
+    <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900 ">
+      {/* Cards Section */}
+      <section className="mb-2">
+        <h5 className="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">
+          Technologies
+        </h5>
+        <div className="flex flex-wrap gap-1">
+          {techList.slice(0, 25).map((tech, index) => (
+            <Card key={index} title={tech} />
           ))}
         </div>
-      </div>
+      </section>
 
-      {/* Middle Section: Scrollable Commands */}
-      {/* Middle Section: Scrollable Commands */}
-      <div className="flex-1 overflow-y-auto px-4 pb-36">
-        <h5 className="text-lg font-semibold mb-2 text-gray-800 dark:text-gray-100">
+      {/* Commands Section */}
+      <section className="flex-1 overflow-hidden">
+        <h5 className="text-lg font-semibold mb-1 text-gray-800 dark:text-gray-100">
           Recent Commands
         </h5>
-        {devCommands.map((cmd, index) => (
-          <div
-            key={index}
-            className="flex justify-between items-center bg-black text-white px-4 py-2 my-1 rounded-lg"
-          >
-            <p className="text-sm font-mono break-all">{cmd}</p>
-            <button
-              onClick={() => handleCopy(cmd, index)}
-              className="text-white hover:text-green-400"
-              title="Copy"
+        <div className="overflow-y-auto max-h-[45vh] pr-1 ">
+          {devCommands.map((cmd, index) => (
+            <div
+              key={index}
+              className="flex justify-between items-center bg-black text-white px-4 py-2 my-1 rounded-md transition-colors duration-300 ease-in-out hover:text-green-500"
             >
-              {copiedIndex === index ? "✅" : <MdContentCopy />}
-            </button>
-          </div>
-        ))}
-      </div>
-
-      {/* Bottom Section: Sticky Search Bar & Theme Buttons */}
-      <div className="sticky bottom-0 w-full bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 p-4">
-        <div className="grid grid-cols-12 gap-2">
-          <div className="col-span-12 md:col-span-8">
-            <input
-              type="text"
-              placeholder="Search"
-              className="w-full p-2.5 text-sm rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-            />
-          </div>
-          <div className="col-span-12 md:col-span-4 flex flex-wrap justify-end gap-2 mt-2 md:mt-0">
-            <button className="text-sm px-3 py-2 rounded-lg bg-blue-700 text-white hover:bg-blue-800">
-              Default
-            </button>
-            <button className="text-sm px-3 py-2 rounded-lg border border-gray-300 text-gray-900 hover:bg-gray-100 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700">
-              Alternative
-            </button>
-            <button className="text-sm px-3 py-2 rounded-lg bg-gray-800 text-white hover:bg-gray-900">
-              Dark
-            </button>
-            <button className="text-sm px-3 py-2 rounded-lg border border-gray-300 text-gray-900 hover:bg-gray-100 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700">
-              Light
-            </button>
-          </div>
+              <p className="text-sm font-mono break-words">{cmd}</p>
+              {/* <button
+                onClick={() => handleCopy(cmd, index)}
+                className="ml-3 text-white hover:text-green-400"
+                title="Copy"
+              >
+                {copiedIndex === index ? (
+                  <TiTick className="text-green-500" />
+                ) : (
+                  <MdContentCopy />
+                )}
+              </button> */}
+              <button
+                onClick={() => handleCopy(cmd, index)}
+                className="ml-3 text-white hover:text-green-500 flex items-center gap-1"
+                title="Copy"
+              >
+                {copiedIndex === index ? (
+                  <>
+                    <TiTick className="text-green-50" />
+                    <span className="text-xs text-green-500">Copied!</span>
+                  </>
+                ) : (
+                  <MdContentCopy />
+                )}
+              </button>
+            </div>
+          ))}
         </div>
-      </div>
+      </section>
+
+      {/* Bottom Sticky Bar */}
+      <footer className="sticky bottom-0 w-full bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 py-2">
+        <div className="flex gap-2">
+          <input
+            type="text"
+            placeholder="Search"
+            className="w-full  p-2.5 text-sm rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+          />
+          <button
+            type="button"
+            className="w-full md:w-auto text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+          >
+            Default
+          </button>
+          <button
+            type="button"
+            className="w-full md:w-auto text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-green-600 dark:hover:bg-green-700 focus:outline-none dark:focus:ring-green-800"
+          >
+            Export 
+          </button>
+          
+        </div>
+      </footer>
     </div>
   );
 };

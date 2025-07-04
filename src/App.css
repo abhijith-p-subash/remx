@@ -25,3 +25,61 @@ select:focus {
 }
 
 
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Reset default body behavior */
+html, body {
+  overscroll-behavior: none;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Remove blue focus ring */
+button:focus,
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+
+/* GLOBAL SCROLLBAR STYLES */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(100, 116, 139, 0.3) transparent; /* for Firefox */
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: rgba(100, 116, 139, 0.3); /* Tailwind slate-500/30 */
+  border-radius: 4px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(100, 116, 139, 0.5);
+}
+
+/* Dark mode scrollbar adjustments */
+.dark *::-webkit-scrollbar-thumb {
+  background-color: rgba(148, 163, 184, 0.3); /* Tailwind slate-400/30 */
+}
+
+.dark *::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(148, 163, 184, 0.5);
+}
