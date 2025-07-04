@@ -10,16 +10,17 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="bg-gray-900 text-white px-6 py-3 shadow-md flex items-center justify-between">
-      <div className="text-lg font-semibold">🔍 MyApp</div>
-      <div className="flex space-x-6">
+    <nav className=" text-white border-b border-gray-700 px-2 py-2">
+      <div className="flex justify-start">
         {navItems.map((item) => (
           <Link
             key={item.name}
             to={item.path}
             className={clsx(
-              "hover:text-blue-400",
-              location.pathname === item.path && "text-blue-400"
+              "px-1 rounded-sm transition-colors duration-200",
+              location.pathname === item.path
+                ? " text-green-500"
+                : "text-gray-300 hover:text-white hover:bg-green-800 hover:bg-opacity-40"
             )}
           >
             {item.name}
