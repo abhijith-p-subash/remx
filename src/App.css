@@ -1,8 +1,9 @@
 
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@plugin "flowbite-react/plugin/tailwindcss";
+@source "../.flowbite-react/class-list.json";
+
 
 /* index.css or App.css */
 html, body {
@@ -25,10 +26,6 @@ select:focus {
 }
 
 
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 /* Reset default body behavior */
 html, body {
