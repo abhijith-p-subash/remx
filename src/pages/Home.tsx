@@ -2,6 +2,7 @@ import Card from "../components/ui/Card";
 import { MdContentCopy } from "react-icons/md";
 import { TiTick } from "react-icons/ti";
 import { useState } from "react";
+import {Button} from 'flowbite-react'
 
 const techList = [
   "Docker", "npm", "Python", "JavaScript", "Rust", "TypeScript",
@@ -93,18 +94,18 @@ const Home = () => {
             placeholder="Search"
             className="w-full px-3 py-2 text-sm rounded-md border border-gray-300 focus:ring-2 focus:ring-green-500 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:text-white"
           />
-          <button
+          <Button
             type="button"
             className="px-4 py-2 text-sm font-medium rounded-md bg-blue-600 hover:bg-blue-700 text-white dark:bg-blue-500 dark:hover:bg-blue-600"
           >
             Default
-          </button>
-          <button
+          </Button>
+          <Button
             type="button"
             className="px-4 py-2 text-sm font-medium rounded-md bg-green-600 hover:bg-green-700 text-white dark:bg-green-500 dark:hover:bg-green-600"
           >
             Export
-          </button>
+          </Button>
         </div>
       </footer>
     </div>

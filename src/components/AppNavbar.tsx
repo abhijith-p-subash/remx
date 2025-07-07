@@ -10,7 +10,7 @@ import { Link, useLocation } from "react-router-dom";
 const navItems = [
   {
     name: "Home",
-    path: "/",
+    path: "/home",
     subItems: [],
   },
   {

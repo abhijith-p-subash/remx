@@ -1,8 +1,13 @@
 import { useEffect } from "react";
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 
-import Navbar from "./components/Navbar";
+import Navbar from "./components/AppNavbar";
 
 import Home from "./pages/Home";
 import Settings from "./pages/Settings";
@@ -26,7 +31,8 @@ function App() {
           <Navbar />
           <div className="flex-1 p-2">
             <Routes>
-              <Route path="/" element={<Home />} />
+              <Route path="/" element={<Navigate to="/home" replace />} />
+              <Route path="/home" element={<Home />} />
               <Route path="/settings" element={<Settings />} />
               <Route path="/categories" element={<Categories />} />
             </Routes>
