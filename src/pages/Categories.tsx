@@ -1,7 +1,20 @@
-import { useState, useEffect } from "react";
-import { Button, Dropdown, DropdownItem, Card } from "flowbite-react";
+import { useState, useEffect, useRef } from "react";
+import {
+  Button,
+  Dropdown,
+  DropdownItem,
+  Label,
+  Modal,
+  ModalBody,
+  ModalHeader,
+  TextInput,
+  Textarea,
+  ModalFooter,
+} from "flowbite-react";
 import { IoMdAdd, IoMdTrash, IoMdCreate } from "react-icons/io";
 import { FaEllipsis } from "react-icons/fa6";
+import randomColor from "randomcolor";
+import { useNavigate } from "react-router-dom";
 
 interface Category {
   id: number;
@@ -11,7 +24,9 @@ interface Category {
 }
 
 const Categories = () => {
-  const [showModal, setShowModal] = useState(false);
+  const rColor = randomColor();
+  const navigate = useNavigate();
+  const [openModal, setOpenModal] = useState(false);
   const [categoryName, setCategoryName] = useState("");
   const [description, setDescription] = useState("");
   const [color, setColor] = useState("#10b981");
@@ -142,66 +157,6 @@ const Categories = () => {
           description: "AI research and deployment company",
           color: "#10a37f",
         },
-        {
-          id: Date.now() + 7,
-          name: "Go",
-          description: "Compiled programming language",
-          color: "#00ADD8",
-        },
-        {
-          id: Date.now() + 8,
-          name: "TypeScript",
-          description: "Typed superset of JavaScript",
-          color: "#3178c6",
-        },
-        {
-          id: Date.now() + 9,
-          name: "Tailwind CSS",
-          description: "Utility-first CSS framework",
-          color: "#38bdf8",
-        },
-        {
-          id: Date.now() + 10,
-          name: "Linux",
-          description: "Open-source OS",
-          color: "#333",
-        },
-        {
-          id: Date.now() + 11,
-          name: "PostgreSQL",
-          description: "Relational database",
-          color: "#336791",
-        },
-        {
-          id: Date.now() + 7,
-          name: "Go",
-          description: "Compiled programming language",
-          color: "#00ADD8",
-        },
-        {
-          id: Date.now() + 8,
-          name: "TypeScript",
-          description: "Typed superset of JavaScript",
-          color: "#3178c6",
-        },
-        {
-          id: Date.now() + 9,
-          name: "Tailwind CSS",
-          description: "Utility-first CSS framework",
-          color: "#38bdf8",
-        },
-        {
-          id: Date.now() + 10,
-          name: "Linux",
-          description: "Open-source OS",
-          color: "#333",
-        },
-        {
-          id: Date.now() + 11,
-          name: "PostgreSQL",
-          description: "Relational database",
-          color: "#336791",
-        },
       ]);
     }
   }, []);
@@ -223,7 +178,7 @@ const Categories = () => {
             id: Date.now(),
             name: categoryName,
             description,
-            color,
+            color: rColor,
           },
         ]);
       }
@@ -236,7 +191,7 @@ const Categories = () => {
     setCategoryName(cat.name);
     setDescription(cat.description);
     setColor(cat.color);
-    setShowModal(true);
+    setOpenModal(true);
   };
 
   const handleDelete = (id: number) => {
@@ -248,7 +203,7 @@ const Categories = () => {
     setDescription("");
     setColor("#10b981");
     setEditingCategory(null);
-    setShowModal(false);
+    setOpenModal(false);
   };
 
   const filteredCategories = categories.filter((cat) =>
@@ -268,36 +223,34 @@ const Categories = () => {
             {filteredCategories.map((cat) => (
               <div
                 key={cat.id}
+                onClick={() => navigate(`${cat.id}`)}
                 className="cursor-pointer min-h-28 p-2 rounded-md shadow-md border border-b-4 border-gray-700  bg-gray-800 relative"
                 style={{ borderBottomColor: cat.color }}
               >
                 <div className="w-full flex justify-between">
-                  {/* <span
-                className="absolute w-3 h-3 rounded-full top-2 right-2"
-                style={{ backgroundColor: cat.color }}
-              ></span> */}
                   <h3 className="truncate text-lg font-bold text-gray-800 dark:text-white">
                     {cat.name}
                   </h3>
-
-                  <Dropdown
-                    label=""
-                    dismissOnClick={false}
-                    renderTrigger={() => (
-                      <span>
-                        <button>
-                          <FaEllipsis />
-                        </button>
-                      </span>
-                    )}
-                  >
-                    <DropdownItem onClick={() => handleEdit(cat)}>
-                      <IoMdCreate className="text-lg me-1" /> Edit
-                    </DropdownItem>
-                    <DropdownItem onClick={() => handleDelete(cat.id)}>
-                      <IoMdTrash className="text-lg me-1" /> Delete
-                    </DropdownItem>
-                  </Dropdown>
+                  <div onClick={(e) => e.stopPropagation()}>
+                    <Dropdown
+                      label=""
+                      dismissOnClick={false}
+                      renderTrigger={() => (
+                        <span>
+                          <button className="cursor-pointer">
+                            <FaEllipsis />
+                          </button>
+                        </span>
+                      )}
+                    >
+                      <DropdownItem onClick={() => handleEdit(cat)}>
+                        <IoMdCreate className="text-lg me-1" /> Edit
+                      </DropdownItem>
+                      <DropdownItem onClick={() => handleDelete(cat.id)}>
+                        <IoMdTrash className="text-lg me-1" /> Delete
+                      </DropdownItem>
+                    </Dropdown>
+                  </div>
                 </div>
                 <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">
                   {cat.description}
@@ -319,7 +272,7 @@ const Categories = () => {
             className="w-full px-3 py-2 text-sm rounded-md border border-gray-300 focus:ring-2 focus:ring-green-500 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:text-white"
           />
           <Button
-            onClick={() => setShowModal(true)}
+            onClick={() => setOpenModal(true)}
             className="flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-md bg-blue-600 hover:bg-blue-700 text-white dark:bg-blue-500 dark:hover:bg-blue-600"
           >
             <IoMdAdd className="text-white font-bold" /> Add
@@ -328,68 +281,49 @@ const Categories = () => {
       </footer>
 
       {/* Modal */}
-      {showModal && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
-          onClick={resetForm}
-        >
-          <div
-            className="bg-white dark:bg-gray-800 rounded-lg shadow-lg w-full max-w-md p-6"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <h2 className="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-100">
-              {editingCategory ? "Edit" : "Add"} Category
-            </h2>
-            <div className="mb-3">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
-                Name
-              </label>
-              <input
+      <Modal show={openModal} size="md" onClose={() => setOpenModal(false)}>
+        <ModalHeader>{editingCategory ? "Update" : "Add"} Category</ModalHeader>
+
+        <ModalBody>
+          <div className="space-y-6">
+            {/* <h3 className="text-xl font-medium text-gray-900 dark:text-white">
+              {editingCategory ? "Update" : "Add"} Category
+            </h3> */}
+            <div>
+              <div className="mb-2 block">
+                <Label htmlFor="name">Name</Label>
+              </div>
+              <TextInput
+                id="name"
                 type="text"
                 value={categoryName}
                 onChange={(e) => setCategoryName(e.target.value)}
-                className="w-full px-3 py-2 text-sm rounded-md border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-2 focus:ring-green-500 focus:outline-none"
+                placeholder="Category Name"
+                required
               />
             </div>
-            <div className="mb-3">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
-                Description
-              </label>
-              <textarea
+            <div>
+              <div className="mb-2 block">
+                <Label htmlFor="description">Description</Label>
+              </div>
+              <Textarea
+                id="description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 rows={2}
-                className="w-full px-3 py-2 text-sm rounded-md border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-2 focus:ring-green-500 focus:outline-none"
-              ></textarea>
-            </div>
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
-                Color
-              </label>
-              <input
-                type="color"
-                value={color}
-                onChange={(e) => setColor(e.target.value)}
-                className="h-10 w-16 cursor-pointer"
-              />
-            </div>
-            <div className="flex justify-end gap-2">
-              <Button
-                onClick={resetForm}
-                className="px-4 py-2 text-sm rounded-md bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-500 text-gray-800 dark:text-white"
-              >
-                Cancel
-              </Button>
-              <Button
-                onClick={handleSaveCategory}
-                className="px-4 py-2 text-sm rounded-md bg-blue-600 hover:bg-blue-700 text-white"
-              >
-                {editingCategory ? "Update" : "Add"}
-              </Button>
+              ></Textarea>
             </div>
           </div>
-        </div>
-      )}
+        </ModalBody>
+        <ModalFooter>
+          <Button color="alternative" onClick={resetForm}>
+            Cancel
+          </Button>
+          <Button onClick={handleSaveCategory}>
+            {editingCategory ? "Update" : "Add"}
+          </Button>
+        </ModalFooter>
+      </Modal>
     </div>
   );
 };

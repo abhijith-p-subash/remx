@@ -12,6 +12,7 @@ import Navbar from "./components/AppNavbar";
 import Home from "./pages/Home";
 import Settings from "./pages/Settings";
 import Categories from "./pages/Categories";
+import Category from "./pages/Category";
 
 function App() {
   useEffect(() => {
@@ -35,6 +36,7 @@ function App() {
               <Route path="/home" element={<Home />} />
               <Route path="/settings" element={<Settings />} />
               <Route path="/categories" element={<Categories />} />
+              <Route path="/categories/:id" element={<Category />} />
             </Routes>
           </div>
         </div>
