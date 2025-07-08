@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { Button, Card } from "flowbite-react";
+import { Button } from "flowbite-react";
 import { IoMdAdd } from "react-icons/io";
 
 const Category = () => {
