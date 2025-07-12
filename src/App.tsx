@@ -26,7 +26,7 @@ function App() {
   }, []);
 
   return (
-    <main className=" bg-gray-100 dark:bg-gray-900 text-black dark:text-white">
+    <main className="bg-gray-900 text-white">
       <Router>
         <div className="h-screen flex flex-col ">
           <Navbar />

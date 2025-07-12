@@ -213,7 +213,7 @@ const Categories = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <section className="flex-1 overflow-hidden">
-        <h5 className="text-md font-semibold mb-2 text-gray-800 dark:text-gray-100 uppercase tracking-wide">
+        <h5 className="text-md font-semibold mb-2  text-gray-100 uppercase tracking-wide">
           Categories
         </h5>
 
@@ -228,7 +228,7 @@ const Categories = () => {
                 style={{ borderBottomColor: cat.color }}
               >
                 <div className="w-full flex justify-between">
-                  <h3 className="truncate text-lg font-bold text-gray-800 dark:text-white">
+                  <h3 className="truncate text-lg font-bold  text-white">
                     {cat.name}
                   </h3>
                   <div onClick={(e) => e.stopPropagation()}>
@@ -252,7 +252,7 @@ const Categories = () => {
                     </Dropdown>
                   </div>
                 </div>
-                <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">
+                <p className="text-sm  text-gray-300 mb-2">
                   {cat.description}
                 </p>
               </div>
@@ -262,14 +262,14 @@ const Categories = () => {
       </section>
 
       {/* Bottom Bar */}
-      <footer className="sticky bottom-0 w-full border-t border-gray-300 dark:border-gray-700 py-3 mt-4 bg-gray-100 dark:bg-gray-900">
+      <footer className="sticky bottom-0 w-full border-t  border-gray-700 py-3 mt-4  bg-gray-900">
         <div className="flex gap-2 items-center">
           <input
             type="text"
             placeholder="Search"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full px-3 py-2 text-sm rounded-md border border-gray-300 focus:ring-2 focus:ring-green-500 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+            className="w-full px-3 py-2 text-sm rounded-md border  focus:ring-2 focus:ring-green-500 focus:outline-none bg-gray-700 border-gray-600 text-white"
           />
 
           <Button onClick={() => setOpenModal(true)}>
@@ -284,9 +284,6 @@ const Categories = () => {
 
         <ModalBody>
           <div className="space-y-6">
-            {/* <h3 className="text-xl font-medium text-gray-900 dark:text-white">
-              {editingCategory ? "Update" : "Add"} Category
-            </h3> */}
             <div>
               <div className="mb-2 block">
                 <Label htmlFor="name">Name</Label>

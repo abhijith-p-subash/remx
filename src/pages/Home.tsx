@@ -40,10 +40,10 @@ const Home = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-100 dark:bg-gray-900">
+    <div className="min-h-screen flex flex-col   bg-gray-900">
       {/* Technologies Section */}
       <section className="mb-4">
-        <h5 className="text-md font-semibold text-gray-800 dark:text-gray-100 mb-2 uppercase tracking-wide">
+        <h5 className="text-md font-semibold  text-gray-100 mb-2 uppercase tracking-wide">
           Tags
         </h5>
         <div className="flex flex-wrap gap-1">
@@ -55,7 +55,7 @@ const Home = () => {
 
       {/* Recent Commands Section */}
       <section className="flex-1 overflow-hidden">
-        <h5 className="text-md font-semibold mb-2 text-gray-800 dark:text-gray-100 uppercase tracking-wide">
+        <h5 className="text-md font-semibold mb-2  text-gray-100 uppercase tracking-wide">
           Recent
         </h5>
         <div className="overflow-y-auto max-h-[47vh] pr-1 space-y-1 custom-scroll">
@@ -64,7 +64,7 @@ const Home = () => {
               key={index}
               className="group flex justify-between items-center bg-black text-white px-4 py-2 rounded-md transition-colors duration-200"
             >
-              <p className="text-sm font-mono break-words text-gray-200 group-hover:text-green-400 transition">
+              <p className="text-sm font-mono break-words  group-hover:text-green-400 transition">
                 {cmd}
               </p>
               <button
@@ -87,22 +87,22 @@ const Home = () => {
       </section>
 
       {/* Bottom Sticky Bar */}
-      <footer className="sticky bottom-0 w-full  border-t border-gray-300 dark:border-gray-700 py-3 mt-4">
+      <footer className="sticky bottom-0 w-full  border-t  border-gray-700 py-3 mt-4">
         <div className="flex gap-2 items-center">
           <input
             type="text"
             placeholder="Search"
-            className="w-full px-3 py-2 text-sm rounded-md border border-gray-300 focus:ring-2 focus:ring-green-500 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+            className="w-full px-3 py-2 text-sm rounded-md border  focus:ring-2 focus:ring-green-500 focus:outline-none bg-gray-700 border-gray-600 text-white"
           />
           <Button
             type="button"
-            className="px-4 py-2 text-sm font-medium rounded-md bg-blue-600 hover:bg-blue-700 text-white dark:bg-blue-500 dark:hover:bg-blue-600"
+
           >
             Default
           </Button>
           <Button
             type="button"
-            className="px-4 py-2 text-sm font-medium rounded-md bg-green-600 hover:bg-green-700 text-white dark:bg-green-500 dark:hover:bg-green-600"
+            color='green'
           >
             Export
           </Button>

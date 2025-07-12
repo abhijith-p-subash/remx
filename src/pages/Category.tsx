@@ -98,7 +98,7 @@ const Category = () => {
   return (
     <>
       {showCopiedAlert && (
-        <div className="fixed bottom-24 right-4 z-50">
+        <div className="fixed bottom-19 right-4 z-50">
           <Toast className="!bg-green-600 !text-white">
             <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-green-800 text-green-200">
               <TiTick className="text-white h-5 w-5" />
@@ -120,7 +120,7 @@ const Category = () => {
               <IoChevronBack className="text-lg" />
             </Button>
 
-            <h5 className="text-md font-semibold  text-gray-800 dark:text-gray-100 uppercase tracking-wide">
+            <h5 className="text-md font-semibold  text-gray-100 uppercase tracking-wide">
               Docker {id}
             </h5>
           </div>
@@ -129,15 +129,15 @@ const Category = () => {
           <div className="overflow-y-auto max-h-[calc(100vh-160px)] px-1">
             <div>
               {npmCommands.map((cmdItem, index) => (
-                <Card key={index} className="max-w-full mb-3 p-0">
-                  <p className="font-normal text-gray-400">
+                <Card key={index} className="max-w-full mb-3  bg-gray-700 border-gray-800">
+                  <p className="font-normal text-gray-400 ">
                     {cmdItem.description}
                   </p>
                   <div
                     onClick={() => handleCopy(cmdItem.cmd, index)}
                     className="cursor-pointer group flex justify-between items-center  text-white  rounded-md transition-colors duration-200"
                   >
-                    <h5 className="text-lg font-bold font-mono break-words text-green-400 group-hover:text-green-300 transition">
+                    <h5 className="text-xl break-words font-mono text-green-400 group-hover:text-green-300 transition">
                       {cmdItem.cmd}
                     </h5>
                   </div>
@@ -148,12 +148,12 @@ const Category = () => {
         </section>
 
         {/* Bottom Bar */}
-        <footer className="sticky bottom-0 w-full border-t border-gray-300 dark:border-gray-700 py-3 mt-4 bg-gray-100 dark:bg-gray-900">
+        <footer className="sticky bottom-0 w-full border-t  border-gray-700 py-3 mt-4  bg-gray-900">
           <div className="flex gap-2 items-center">
             <input
               type="text"
               placeholder="Search"
-              className="w-full px-3 py-2 text-sm rounded-md border border-gray-300 focus:ring-2 focus:ring-green-500 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+              className="w-full px-3 py-2 text-sm rounded-md border  focus:ring-2 focus:ring-green-500 focus:outline-none bg-gray-700 border-gray-600 text-white"
             />
             <Button color="green">
               <MdDownload className="mr-2 h-5 w-5" />
