@@ -211,24 +211,24 @@ const Categories = () => {
   );
 
   return (
-    <div className="min-h-screen flex flex-col">
+   <div className="min-h-screen flex flex-col bg-white text-gray-900 dark:bg-gray-900 dark:text-white">
       <section className="flex-1 overflow-hidden">
-        <h5 className="text-md font-semibold mb-2  text-gray-100 uppercase tracking-wide">
+        <h5 className="text-md font-semibold mb-2 text-gray-900 dark:text-gray-100 uppercase tracking-wide">
           Categories
         </h5>
 
         {/* Category List */}
         <div className="overflow-y-auto max-h-[calc(102vh-160px)] px-1">
-          <div className="grid grid-cols-4 gap-2">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
             {filteredCategories.map((cat) => (
               <div
                 key={cat.id}
                 onClick={() => navigate(`${cat.id}`)}
-                className="cursor-pointer min-h-28 p-2 rounded-md shadow-md border border-b-4 border-gray-700  bg-gray-800 relative"
+                className="cursor-pointer min-h-28 p-2 rounded-md shadow-md border border-b-4 bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-700 relative"
                 style={{ borderBottomColor: cat.color }}
               >
                 <div className="w-full flex justify-between">
-                  <h3 className="truncate text-lg font-bold  text-white">
+                  <h3 className="truncate text-lg font-bold text-gray-900 dark:text-white">
                     {cat.name}
                   </h3>
                   <div onClick={(e) => e.stopPropagation()}>
@@ -252,7 +252,7 @@ const Categories = () => {
                     </Dropdown>
                   </div>
                 </div>
-                <p className="text-sm  text-gray-300 mb-2">
+                <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
                   {cat.description}
                 </p>
               </div>
@@ -262,16 +262,15 @@ const Categories = () => {
       </section>
 
       {/* Bottom Bar */}
-      <footer className="sticky bottom-0 w-full border-t  border-gray-700 py-3 mt-4  bg-gray-900">
+      <footer className="sticky bottom-0 w-full border-t border-gray-300 dark:border-gray-700 py-3 mt-4 bg-gray-100 dark:bg-gray-900">
         <div className="flex gap-2 items-center">
           <input
             type="text"
             placeholder="Search"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full px-3 py-2 text-sm rounded-md border  focus:ring-2 focus:ring-green-500 focus:outline-none bg-gray-700 border-gray-600 text-white"
+            className="w-full px-3 py-2 text-sm rounded-md border bg-gray-100 dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white focus:ring-2 focus:ring-green-500 focus:outline-none"
           />
-
           <Button onClick={() => setOpenModal(true)}>
             <IoMdAdd className="mr-2 h-5 w-5" /> Add
           </Button>
@@ -281,13 +280,10 @@ const Categories = () => {
       {/* Modal */}
       <Modal show={openModal} size="md" onClose={() => setOpenModal(false)}>
         <ModalHeader>{editingCategory ? "Update" : "Add"} Category</ModalHeader>
-
         <ModalBody>
           <div className="space-y-6">
             <div>
-              <div className="mb-2 block">
-                <Label htmlFor="name">Name</Label>
-              </div>
+              <Label htmlFor="name">Name</Label>
               <TextInput
                 id="name"
                 type="text"
@@ -298,15 +294,13 @@ const Categories = () => {
               />
             </div>
             <div>
-              <div className="mb-2 block">
-                <Label htmlFor="description">Description</Label>
-              </div>
+              <Label htmlFor="description">Description</Label>
               <Textarea
                 id="description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 rows={2}
-              ></Textarea>
+              />
             </div>
           </div>
         </ModalBody>

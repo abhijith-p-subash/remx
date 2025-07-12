@@ -1,8 +1,8 @@
 import Card from "../components/ui/Card";
 import { MdContentCopy } from "react-icons/md";
 import { TiTick } from "react-icons/ti";
-import { useState } from "react";
-import {Button} from 'flowbite-react'
+import { useEffect, useState } from "react";
+import { Button } from "flowbite-react";
 
 const techList = [
   "Docker", "npm", "Python", "JavaScript", "Rust", "TypeScript",
@@ -28,6 +28,11 @@ const devCommands = [
 
 const Home = () => {
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
+  const [darkMode, setDarkMode] = useState(true); // Toggle dark/light
+
+  useEffect(() => {
+    document.documentElement.classList.toggle('dark', darkMode);
+  }, [darkMode]);
 
   const handleCopy = async (cmd: string, index: number) => {
     try {
@@ -40,10 +45,10 @@ const Home = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col   bg-gray-900">
+    <div className="min-h-screen flex flex-col bg-white text-gray-900 dark:bg-gray-900 dark:text-white">
       {/* Technologies Section */}
       <section className="mb-4">
-        <h5 className="text-md font-semibold  text-gray-100 mb-2 uppercase tracking-wide">
+        <h5 className="text-md font-semibold text-gray-900 dark:text-gray-100 mb-2 uppercase tracking-wide">
           Tags
         </h5>
         <div className="flex flex-wrap gap-1">
@@ -55,27 +60,27 @@ const Home = () => {
 
       {/* Recent Commands Section */}
       <section className="flex-1 overflow-hidden">
-        <h5 className="text-md font-semibold mb-2  text-gray-100 uppercase tracking-wide">
+        <h5 className="text-md font-semibold mb-2 text-gray-900 dark:text-gray-100 uppercase tracking-wide">
           Recent
         </h5>
         <div className="overflow-y-auto max-h-[47vh] pr-1 space-y-1 custom-scroll">
           {devCommands.map((cmd, index) => (
             <div
               key={index}
-              className="group flex justify-between items-center bg-black text-white px-4 py-2 rounded-md transition-colors duration-200"
+              className="group flex justify-between items-center bg-gray-100 dark:bg-black text-gray-800 dark:text-white px-4 py-2 rounded-md transition-colors duration-200"
             >
-              <p className="text-sm font-mono break-words  group-hover:text-green-400 transition">
+              <p className="text-sm font-mono break-words group-hover:text-green-600 dark:group-hover:text-green-400 transition">
                 {cmd}
               </p>
               <button
                 onClick={() => handleCopy(cmd, index)}
-                className="ml-3 text-gray-400 hover:text-green-500 flex items-center gap-1 text-sm"
+                className="ml-3 text-gray-500 dark:text-gray-400 hover:text-green-600 dark:hover:text-green-400 flex items-center gap-1 text-sm"
                 title="Copy"
               >
                 {copiedIndex === index ? (
                   <>
-                    <TiTick className="text-green-400" />
-                    <span className="text-xs text-green-400">Copied</span>
+                    <TiTick className="text-green-600 dark:text-green-400" />
+                    <span className="text-xs">Copied</span>
                   </>
                 ) : (
                   <MdContentCopy />
@@ -87,23 +92,15 @@ const Home = () => {
       </section>
 
       {/* Bottom Sticky Bar */}
-      <footer className="sticky bottom-0 w-full  border-t  border-gray-700 py-3 mt-4">
+      <footer className="sticky bottom-0 w-full border-t border-gray-300 dark:border-gray-700 py-3 mt-4 bg-white dark:bg-gray-900">
         <div className="flex gap-2 items-center">
           <input
             type="text"
             placeholder="Search"
-            className="w-full px-3 py-2 text-sm rounded-md border  focus:ring-2 focus:ring-green-500 focus:outline-none bg-gray-700 border-gray-600 text-white"
+            className="w-full px-3 py-2 text-sm rounded-md border bg-gray-100 dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white focus:ring-2 focus:ring-green-500 focus:outline-none"
           />
-          <Button
-            type="button"
-
-          >
-            Default
-          </Button>
-          <Button
-            type="button"
-            color='green'
-          >
+          <Button type="button">Default</Button>
+          <Button type="button" color="green">
             Export
           </Button>
         </div>

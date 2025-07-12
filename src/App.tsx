@@ -8,7 +8,6 @@ import {
 } from "react-router-dom";
 
 import Navbar from "./components/AppNavbar";
-
 import Home from "./pages/Home";
 import Settings from "./pages/Settings";
 import Categories from "./pages/Categories";
@@ -16,19 +15,22 @@ import Category from "./pages/Category";
 
 function App() {
   useEffect(() => {
-    const disableContextMenu = (e: MouseEvent) => {
-      e.preventDefault();
-    };
+    // Force dark mode on mount
+    document.documentElement.classList.add("dark");
+
+    // Disable right-click
+    const disableContextMenu = (e: MouseEvent) => e.preventDefault();
     window.addEventListener("contextmenu", disableContextMenu);
+
     return () => {
       window.removeEventListener("contextmenu", disableContextMenu);
     };
   }, []);
 
   return (
-    <main className="bg-gray-900 text-white">
+    <main className="bg-white text-gray-900 dark:bg-gray-900 dark:text-white transition-colors">
       <Router>
-        <div className="h-screen flex flex-col ">
+        <div className="h-screen flex flex-col">
           <Navbar />
           <div className="flex-1 p-2">
             <Routes>

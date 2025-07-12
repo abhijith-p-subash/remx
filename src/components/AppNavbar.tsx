@@ -45,7 +45,7 @@ export default function AppNavbar() {
     <Navbar
       fluid
       rounded
-      className="bg-gray-900 border-b border-gray-700 py-1 gap-0"
+      className="bg-white border-b border-gray-200 text-gray-900 dark:bg-gray-900 dark:border-gray-700 dark:text-white"
     >
       <NavbarCollapse>
         {navItems.map((item) =>
