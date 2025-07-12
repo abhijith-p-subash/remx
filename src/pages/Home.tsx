@@ -62,7 +62,7 @@ const Home = () => {
           {devCommands.map((cmd, index) => (
             <div
               key={index}
-              className="group flex justify-between items-center bg-gray-800 dark:bg-black text-white px-4 py-2 rounded-md transition-colors duration-200"
+              className="group flex justify-between items-center bg-black text-white px-4 py-2 rounded-md transition-colors duration-200"
             >
               <p className="text-sm font-mono break-words text-gray-200 group-hover:text-green-400 transition">
                 {cmd}

@@ -271,11 +271,9 @@ const Categories = () => {
             onChange={(e) => setSearch(e.target.value)}
             className="w-full px-3 py-2 text-sm rounded-md border border-gray-300 focus:ring-2 focus:ring-green-500 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:text-white"
           />
-          <Button
-            onClick={() => setOpenModal(true)}
-            className="flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-md bg-blue-600 hover:bg-blue-700 text-white dark:bg-blue-500 dark:hover:bg-blue-600"
-          >
-            <IoMdAdd className="text-white font-bold" /> Add
+
+          <Button onClick={() => setOpenModal(true)}>
+            <IoMdAdd className="mr-2 h-5 w-5" /> Add
           </Button>
         </div>
       </footer>
