@@ -3,36 +3,105 @@ import { MdContentCopy } from "react-icons/md";
 import { TiTick } from "react-icons/ti";
 import { useEffect, useState } from "react";
 import { Button } from "flowbite-react";
+import { invoke } from "@tauri-apps/api/core";
+
+type User = {
+  id: number;
+  name: string;
+  age: number;
+};
 
 const techList = [
-  "Docker", "npm", "Python", "JavaScript", "Rust", "TypeScript",
-  "Node.js", "React", "Next.js", "Vite", "Bun", "Go",
-  "C", "C++", "Java", "Kotlin", "Swift", "Tailwind CSS",
-  "PostgreSQL", "MongoDB", "SQLite", "Redis", "Git", "GitHub Actions",
-  "Linux", "Bash", "GraphQL", "REST API", "WebAssembly", "Tauri",
-  "Electron", "Zig", "Astro", "Svelte", "Vue.js", "Deno",
+  "Docker",
+  "npm",
+  "Python",
+  "JavaScript",
+  "Rust",
+  "TypeScript",
+  "Node.js",
+  "React",
+  "Next.js",
+  "Vite",
+  "Bun",
+  "Go",
+  "C",
+  "C++",
+  "Java",
+  "Kotlin",
+  "Swift",
+  "Tailwind CSS",
+  "PostgreSQL",
+  "MongoDB",
+  "SQLite",
+  "Redis",
+  "Git",
+  "GitHub Actions",
+  "Linux",
+  "Bash",
+  "GraphQL",
+  "REST API",
+  "WebAssembly",
+  "Tauri",
+  "Electron",
+  "Zig",
+  "Astro",
+  "Svelte",
+  "Vue.js",
+  "Deno",
 ];
 
 const devCommands = [
-  "npm install", "yarn dev", "cargo build", "pip install requests", "go run main.go",
-  "git clone https://github.com/user/repo.git", "git status", "git checkout -b feature-branch",
-  "git pull origin main", "git log --oneline --graph --decorate --all",
-  "git reset --hard origin/main", "docker build -t myapp .", "docker run -p 3000:3000 myapp",
-  "docker-compose up", "docker exec -it container_name bash",
+  "npm install",
+  "yarn dev",
+  "cargo build",
+  "pip install requests",
+  "go run main.go",
+  "git clone https://github.com/user/repo.git",
+  "git status",
+  "git checkout -b feature-branch",
+  "git pull origin main",
+  "git log --oneline --graph --decorate --all",
+  "git reset --hard origin/main",
+  "docker build -t myapp .",
+  "docker run -p 3000:3000 myapp",
+  "docker-compose up",
+  "docker exec -it container_name bash",
   "docker run --rm -v $(pwd):/app -w /app node:18 npm install",
   "gcc -Wall -Wextra -o build/app src/main.c src/utils.c -I./include",
-  "make clean && make all", "cargo run --release --features gui",
-  "cargo test --all --no-fail-fast -- --nocapture", "npm run lint", "pytest tests/",
-  "eslint src/**/*.{js,ts,jsx,tsx} --fix", "jest --coverage --watchAll",
+  "make clean && make all",
+  "cargo run --release --features gui",
+  "cargo test --all --no-fail-fast -- --nocapture",
+  "npm run lint",
+  "pytest tests/",
+  "eslint src/**/*.{js,ts,jsx,tsx} --fix",
+  "jest --coverage --watchAll",
 ];
 
 const Home = () => {
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
-  const [darkMode, setDarkMode] = useState(true); // Toggle dark/light
+  const [users, setUsers] = useState<User[]>([]);
+  const [name, setName] = useState("");
+  const [age, setAge] = useState("");
 
+  const loadUsers = async () => {
+    const result = await invoke<User[]>("get_users_cmd");
+    setUsers(result);
+  };
+
+  const addUser = async () => {
+    await invoke("create_user_cmd", { name, age: parseInt(age) });
+    await loadUsers();
+    setName("");
+    setAge("");
+  };
+
+  const deleteUser = async (id: number) => {
+    await invoke("delete_user_cmd", { id });
+    await loadUsers();
+  };
   useEffect(() => {
-    document.documentElement.classList.toggle('dark', darkMode);
-  }, [darkMode]);
+    loadUsers();
+  }, []);
 
   const handleCopy = async (cmd: string, index: number) => {
     try {
@@ -46,6 +115,21 @@ const Home = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-white text-gray-900 dark:bg-gray-900 dark:text-white">
+
+      <div>
+      <h1>SQLite CRUD</h1>
+      <input value={name} onChange={e => setName(e.target.value)} placeholder="Name" />
+      <input value={age} onChange={e => setAge(e.target.value)} placeholder="Age" />
+      <button onClick={addUser}>Add User</button>
+      <ul>
+        {users.map(user => (
+          <li key={user.id}>
+            {user.name} ({user.age}) <button onClick={() => deleteUser(user.id)}>Delete</button>
+          </li>
+        ))}
+      </ul>
+    </div>
+
       {/* Technologies Section */}
       <section className="mb-4">
         <h5 className="text-md font-semibold text-gray-900 dark:text-gray-100 mb-2 uppercase tracking-wide">
