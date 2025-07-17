@@ -116,7 +116,7 @@ const Home = () => {
   return (
     <div className="min-h-screen flex flex-col bg-white text-gray-900 dark:bg-gray-900 dark:text-white">
 
-      <div>
+      {/* <div>
       <h1>SQLite CRUD</h1>
       <input value={name} onChange={e => setName(e.target.value)} placeholder="Name" />
       <input value={age} onChange={e => setAge(e.target.value)} placeholder="Age" />
@@ -128,7 +128,7 @@ const Home = () => {
           </li>
         ))}
       </ul>
-    </div>
+    </div> */}
 
       {/* Technologies Section */}
       <section className="mb-4">
