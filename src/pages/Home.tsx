@@ -79,29 +79,6 @@ const devCommands = [
 
 const Home = () => {
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
-  const [users, setUsers] = useState<User[]>([]);
-  const [name, setName] = useState("");
-  const [age, setAge] = useState("");
-
-  const loadUsers = async () => {
-    const result = await invoke<User[]>("get_users_cmd");
-    setUsers(result);
-  };
-
-  const addUser = async () => {
-    await invoke("create_user_cmd", { name, age: parseInt(age) });
-    await loadUsers();
-    setName("");
-    setAge("");
-  };
-
-  const deleteUser = async (id: number) => {
-    await invoke("delete_user_cmd", { id });
-    await loadUsers();
-  };
-  useEffect(() => {
-    loadUsers();
-  }, []);
 
   const handleCopy = async (cmd: string, index: number) => {
     try {
@@ -115,20 +92,6 @@ const Home = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-white text-gray-900 dark:bg-gray-900 dark:text-white">
-
-      {/* <div>
-      <h1>SQLite CRUD</h1>
-      <input value={name} onChange={e => setName(e.target.value)} placeholder="Name" />
-      <input value={age} onChange={e => setAge(e.target.value)} placeholder="Age" />
-      <button onClick={addUser}>Add User</button>
-      <ul>
-        {users.map(user => (
-          <li key={user.id}>
-            {user.name} ({user.age}) <button onClick={() => deleteUser(user.id)}>Delete</button>
-          </li>
-        ))}
-      </ul>
-    </div> */}
 
       {/* Technologies Section */}
       <section className="mb-4">
