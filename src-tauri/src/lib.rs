@@ -1,6 +1,4 @@
 // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
-// use tauri::tra::TrayIconBuilder;
-// use tauri::AppHandle;
 use tauri::{
     menu::{Menu, MenuItem},
     tray::TrayIconBuilder,
@@ -41,7 +39,7 @@ fn delete_user_cmd(app: AppHandle, id: i32) -> Result<(), String> {
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
-        .plugin(tauri_plugin_global_shortcut::Builder::new().build())
+        .plugin(tauri_plugin_opener::init())
         .setup(|app| {
             let quit_i = MenuItem::with_id(app, "quit", "Quit", true, None::<&str>)?;
             let menu = Menu::with_items(app, &[&quit_i])?;
