@@ -12,12 +12,16 @@
   "app": {
     "windows": [
       {
+        "label": "main",
         "title": "remx",
         "width": 800,
         "height": 600,
         "resizable": false,
         "maximizable": false,
-        "fullscreen": false
+        "fullscreen": false,
+        "visible": true,
+        "decorations": true,
+        "skipTaskbar": true
       }
     ],
     "security": {
